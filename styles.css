@@ -1,0 +1,30 @@
+html {
+  background-color: #000;
+  color: #fff;
+  font-family: "JetBrains Mono", monospace;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+canvas {
+  width: 800px;
+  height: 500px;
+  border: 2px solid #fafafa;
+  /* background: #fff; */
+}
+
+button {
+  background-color: #1a1a1a;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 8px 12px;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.canvas-wrapper {
+}
