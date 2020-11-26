@@ -154,6 +154,9 @@ var timer;
 // arrow button handler
 function arrowKeyDown(e) {
   console.log("arrowbuttdown");
+  //first draw function
+  arrowKeyDraw({ targetClass: e.target.className });
+  // loop drawing while button is pressed
   timer = setInterval(function () {
     arrowKeyDraw({ targetClass: e.target.className });
   }, 100); // to prevent looping
@@ -161,6 +164,7 @@ function arrowKeyDown(e) {
 
 function arrowKeyUp(e) {
   console.log("arrowbuttup");
+  // clearInterval(delay);
   clearInterval(timer);
 }
 
