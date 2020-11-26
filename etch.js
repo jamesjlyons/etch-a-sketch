@@ -1,10 +1,11 @@
 // Select elements on the page
 const canvas = document.querySelector("#etch");
+const canvasBlur = document.querySelector("#etchBlur");
 const ctx = canvas.getContext("2d");
+const ctxBlur = canvasBlur.getContext("2d");
 const shakeButton = document.querySelector(".shake-button");
 const moveAmount = 8;
 let hue = 0;
-let isDrawing = false;
 
 // setup canvas
 // const width = canvas.width;
@@ -27,15 +28,33 @@ ctx.moveTo(x, y);
 ctx.lineTo(x, y);
 ctx.stroke();
 
+ctxBlur.lineJoin = "square";
+ctxBlur.lineCap = "square";
+ctxBlur.lineWidth = moveAmount;
+// ctxBlur.strokeStyle = "hsla(165, 82%, 52%, 1)";
+// ctxBlur.shadowColor = "hsla(165, 82%, 52%, 0.8)";
+ctxBlur.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+ctxBlur.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
+ctxBlur.shadowBlur = 16;
+
+ctxBlur.beginPath(); // start drawing
+ctxBlur.moveTo(x, y);
+ctxBlur.lineTo(x, y);
+ctxBlur.stroke();
+
 // draw function
 function draw({ key }) {
   console.log(key);
   hue += 4;
   ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
   ctx.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
+  ctxBlur.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  ctxBlur.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
   // start path
   ctx.beginPath();
   ctx.moveTo(x, y);
+  ctxBlur.beginPath();
+  ctxBlur.moveTo(x, y);
   // move x and y based on input
   switch (key) {
     case "ArrowUp":
@@ -55,6 +74,8 @@ function draw({ key }) {
   }
   ctx.lineTo(x, y);
   ctx.stroke();
+  ctxBlur.lineTo(x, y);
+  ctxBlur.stroke();
 }
 
 // arrow button draw
@@ -88,6 +109,7 @@ function arrowKeyDraw({ targetClass }) {
   ctx.stroke();
 }
 
+// TODO: enable shift modifier to draw longer strokes
 // function drawMore({ key }) {
 //   console.log(key);
 //   // start path
@@ -134,11 +156,10 @@ function arrowKeyDown(e) {
   console.log("arrowbuttdown");
   timer = setInterval(function () {
     arrowKeyDraw({ targetClass: e.target.className });
-  }, 50); // to prevent looping
+  }, 100); // to prevent looping
 }
 
 function arrowKeyUp(e) {
-  // isDrawing = false;
   console.log("arrowbuttup");
   clearInterval(timer);
 }
