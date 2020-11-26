@@ -180,6 +180,9 @@ function handleKey(e) {
     e.preventDefault();
     draw({ key: e.key });
   }
+  if (e.key.includes("c")) {
+    clearCanvas();
+  }
 }
 
 function arrowKeyDown(e) {
