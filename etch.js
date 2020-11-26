@@ -5,7 +5,9 @@ const ctx = canvas.getContext("2d");
 const ctxBlur = canvasBlur.getContext("2d");
 const shakeButton = document.querySelector(".shake-button");
 const moveAmount = 8;
+const moveMoreAmount = 16;
 let hue = 0;
+var timer;
 
 // setup canvas
 // const width = canvas.width;
@@ -109,57 +111,94 @@ function arrowKeyDraw({ targetClass }) {
   ctx.stroke();
 }
 
-// TODO: enable shift modifier to draw longer strokes
-// function drawMore({ key }) {
-//   console.log(key);
-//   // start path
-//   ctx.beginPath();
-//   ctx.moveTo(x, y);
-//   // move x and y based on input
-//   switch (key) {
-//     case "ArrowUp":
-//       y = y - 24;
-//       break;
-//     case "ArrowDown":
-//       y = y + 24;
-//       break;
-//     case "ArrowRight":
-//       x = x + 24;
-//       break;
-//     case "ArrowLeft":
-//       x = x - 24;
-//       break;
-//     default:
-//       break;
-//   }
-//   ctx.lineTo(x, y);
-//   ctx.stroke();
-// }
+// draw more function
+function drawMore({ key }) {
+  console.log("moar");
+  console.log(key);
+  // start path
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  // move x and y based on input
+  switch (key) {
+    case "ArrowUp":
+      y = y - moveMoreAmount;
+      break;
+    case "ArrowDown":
+      y = y + moveMoreAmount;
+      break;
+    case "ArrowRight":
+      x = x + moveMoreAmount;
+      break;
+    case "ArrowLeft":
+      x = x - moveMoreAmount;
+      break;
+    default:
+      break;
+  }
+  ctx.lineTo(x, y);
+  ctx.stroke();
+}
+
+// arrow button draw more function
+function arrowKeyDrawMore({ targetClass }) {
+  console.log(targetClass);
+  hue += 4;
+  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  ctx.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
+  // start path
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  // move x and y based on input
+  switch (targetClass) {
+    case "upkey":
+      y = y - moveMoreAmount;
+      break;
+    case "downkey":
+      y = y + moveMoreAmount;
+      break;
+    case "rightkey":
+      x = x + moveMoreAmount;
+      break;
+    case "leftkey":
+      x = x - moveMoreAmount;
+      break;
+    default:
+      console.log(targetClass);
+      break;
+  }
+  ctx.lineTo(x, y);
+  ctx.stroke();
+}
 
 // keypress handlers
 function handleKey(e) {
-  if (e.key.includes("Arrow")) {
-    e.preventDefault();
-    draw({ key: e.key });
-  } else if (e.ShiftKey && e.key.includes("Arrow")) {
+  if (e.shiftKey && e.key.includes("Arrow")) {
     e.preventDefault();
     drawMore({ key: e.key });
   }
+  if (e.key.includes("Arrow")) {
+    e.preventDefault();
+    draw({ key: e.key });
+  }
 }
 
-var timer;
-
-// TODO: set delay for mousedown drawing vs click drawing
-
-// arrow button handler
 function arrowKeyDown(e) {
   console.log("arrowbuttdown");
-  //first draw function
-  arrowKeyDraw({ targetClass: e.target.className });
-  // loop drawing while button is pressed
-  timer = setInterval(function () {
+  if (e.shiftKey) {
+    //first draw function
+    arrowKeyDrawMore({ targetClass: e.target.className });
+    // loop drawing while button is pressed
+    timer = setInterval(function () {
+      arrowKeyDrawMore({ targetClass: e.target.className });
+    }, 100); // to prevent looping
+  } else {
+    //first draw function
     arrowKeyDraw({ targetClass: e.target.className });
-  }, 100); // to prevent looping
+    // loop drawing while button is pressed
+    timer = setInterval(function () {
+      arrowKeyDraw({ targetClass: e.target.className });
+    }, 100); // to prevent looping
+  }
 }
 
 function arrowKeyUp(e) {
