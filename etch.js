@@ -4,6 +4,7 @@ const ctx = canvas.getContext("2d");
 const shakeButton = document.querySelector(".shake-button");
 const moveAmount = 8;
 let hue = 0;
+let isDrawing = false;
 
 // setup canvas
 // const width = canvas.width;
@@ -56,31 +57,62 @@ function draw({ key }) {
   ctx.stroke();
 }
 
-function drawMore({ key }) {
-  console.log(key);
+// arrow button draw
+function arrowKeyDraw({ targetClass }) {
+  console.log(targetClass);
+  hue += 4;
+  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  ctx.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
   // start path
   ctx.beginPath();
   ctx.moveTo(x, y);
   // move x and y based on input
-  switch (key) {
-    case "ArrowUp":
-      y = y - 24;
+  switch (targetClass) {
+    case "upkey":
+      y = y - moveAmount;
       break;
-    case "ArrowDown":
-      y = y + 24;
+    case "downkey":
+      y = y + moveAmount;
       break;
-    case "ArrowRight":
-      x = x + 24;
+    case "rightkey":
+      x = x + moveAmount;
       break;
-    case "ArrowLeft":
-      x = x - 24;
+    case "leftkey":
+      x = x - moveAmount;
       break;
     default:
+      console.log(targetClass);
       break;
   }
   ctx.lineTo(x, y);
   ctx.stroke();
 }
+
+// function drawMore({ key }) {
+//   console.log(key);
+//   // start path
+//   ctx.beginPath();
+//   ctx.moveTo(x, y);
+//   // move x and y based on input
+//   switch (key) {
+//     case "ArrowUp":
+//       y = y - 24;
+//       break;
+//     case "ArrowDown":
+//       y = y + 24;
+//       break;
+//     case "ArrowRight":
+//       x = x + 24;
+//       break;
+//     case "ArrowLeft":
+//       x = x - 24;
+//       break;
+//     default:
+//       break;
+//   }
+//   ctx.lineTo(x, y);
+//   ctx.stroke();
+// }
 
 // keypress handlers
 function handleKey(e) {
@@ -91,6 +123,24 @@ function handleKey(e) {
     e.preventDefault();
     drawMore({ key: e.key });
   }
+}
+
+var timer;
+
+// TODO: set delay for mousedown drawing vs click drawing
+
+// arrow button handler
+function arrowKeyDown(e) {
+  console.log("arrowbuttdown");
+  timer = setInterval(function () {
+    arrowKeyDraw({ targetClass: e.target.className });
+  }, 50); // to prevent looping
+}
+
+function arrowKeyUp(e) {
+  // isDrawing = false;
+  console.log("arrowbuttup");
+  clearInterval(timer);
 }
 
 // clear function
@@ -116,7 +166,11 @@ window.addEventListener("keydown", handleKey);
 shakeButton.addEventListener("click", clearCanvas);
 
 // arrow button listeners
-document.querySelector(".leftkey").addEventListener("click", arrowKeyHandler);
-document.querySelector(".upkey").addEventListener("click", arrowKeyHandler);
-document.querySelector(".downkey").addEventListener("click", arrowKeyHandler);
-document.querySelector(".rightkey").addEventListener("click", arrowKeyHandler);
+document.querySelector(".leftkey").addEventListener("mousedown", arrowKeyDown);
+document.querySelector(".upkey").addEventListener("mousedown", arrowKeyDown);
+document.querySelector(".downkey").addEventListener("mousedown", arrowKeyDown);
+document.querySelector(".rightkey").addEventListener("mousedown", arrowKeyDown);
+document.querySelector(".leftkey").addEventListener("mouseup", arrowKeyUp);
+document.querySelector(".upkey").addEventListener("mouseup", arrowKeyUp);
+document.querySelector(".downkey").addEventListener("mouseup", arrowKeyUp);
+document.querySelector(".rightkey").addEventListener("mouseup", arrowKeyUp);
