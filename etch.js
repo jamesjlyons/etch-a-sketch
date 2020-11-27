@@ -210,6 +210,7 @@ function arrowKeyUp(e) {
   clearInterval(timer);
 }
 
+// TODO: clear blurred canvas too
 // clear function
 function clearCanvas() {
   canvas.classList.add("shake");
