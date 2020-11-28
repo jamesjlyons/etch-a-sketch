@@ -110,6 +110,8 @@ function arrowKeyDraw({ targetClass }) {
   }
   ctx.lineTo(x, y);
   ctx.stroke();
+  ctxBlur.lineTo(x, y);
+  ctxBlur.stroke();
 }
 
 // draw more function
@@ -138,6 +140,8 @@ function drawMore({ key }) {
   }
   ctx.lineTo(x, y);
   ctx.stroke();
+  ctxBlur.lineTo(x, y);
+  ctxBlur.stroke();
 }
 
 // arrow button draw more function
