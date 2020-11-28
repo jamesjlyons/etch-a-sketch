@@ -87,9 +87,13 @@ function arrowKeyDraw({ targetClass }) {
   hue += 4;
   ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
   ctx.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
+  ctxBlur.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  ctxBlur.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
   // start path
   ctx.beginPath();
   ctx.moveTo(x, y);
+  ctxBlur.beginPath();
+  ctxBlur.moveTo(x, y);
   // move x and y based on input
   switch (targetClass) {
     case "upkey":
@@ -118,9 +122,16 @@ function arrowKeyDraw({ targetClass }) {
 function drawMore({ key }) {
   console.log("moar");
   console.log(key);
+  hue += 4;
+  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  ctx.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
+  ctxBlur.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  ctxBlur.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
   // start path
   ctx.beginPath();
   ctx.moveTo(x, y);
+  ctxBlur.beginPath();
+  ctxBlur.moveTo(x, y);
   // move x and y based on input
   switch (key) {
     case "ArrowUp":
@@ -150,9 +161,13 @@ function arrowKeyDrawMore({ targetClass }) {
   hue += 4;
   ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
   ctx.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
+  ctxBlur.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  ctxBlur.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
   // start path
   ctx.beginPath();
   ctx.moveTo(x, y);
+  ctxBlur.beginPath();
+  ctxBlur.moveTo(x, y);
   // move x and y based on input
   switch (targetClass) {
     case "upkey":
@@ -173,6 +188,8 @@ function arrowKeyDrawMore({ targetClass }) {
   }
   ctx.lineTo(x, y);
   ctx.stroke();
+  ctxBlur.lineTo(x, y);
+  ctxBlur.stroke();
 }
 
 // keypress handlers
