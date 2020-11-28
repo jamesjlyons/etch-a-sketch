@@ -1,6 +1,7 @@
 // Select elements on the page
 const canvas = document.querySelector("#etch");
 const canvasBlur = document.querySelector("#etchBlur");
+const screen = document.querySelector(".canvas-wrapper");
 const ctx = canvas.getContext("2d");
 const ctxBlur = canvasBlur.getContext("2d");
 const shakeButton = document.querySelector(".shake-button");
@@ -204,7 +205,7 @@ function arrowKeyDown(e) {
   }
 }
 
-function arrowKeyUp(e) {
+function arrowKeyUp() {
   console.log("arrowbuttup");
   // clearInterval(delay);
   clearInterval(timer);
@@ -213,12 +214,12 @@ function arrowKeyUp(e) {
 // TODO: clear blurred canvas too
 // clear function
 function clearCanvas() {
-  canvas.classList.add("shake");
+  screen.classList.add("shake");
   fadeCanvas();
-  canvas.addEventListener(
+  screen.addEventListener(
     "animationend",
     function () {
-      canvas.classList.remove("shake");
+      screen.classList.remove("shake");
     },
     { once: true }
   );
@@ -242,3 +243,7 @@ document.querySelector(".leftkey").addEventListener("mouseup", arrowKeyUp);
 document.querySelector(".upkey").addEventListener("mouseup", arrowKeyUp);
 document.querySelector(".downkey").addEventListener("mouseup", arrowKeyUp);
 document.querySelector(".rightkey").addEventListener("mouseup", arrowKeyUp);
+document.querySelector(".leftkey").addEventListener("mouseout", arrowKeyUp);
+document.querySelector(".upkey").addEventListener("mouseout", arrowKeyUp);
+document.querySelector(".downkey").addEventListener("mouseout", arrowKeyUp);
+document.querySelector(".rightkey").addEventListener("mouseout", arrowKeyUp);
