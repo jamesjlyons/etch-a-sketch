@@ -226,6 +226,7 @@ function clearCanvas() {
 }
 function fadeCanvas() {
   ctx.clearRect(0, 0, width, height);
+  ctxBlur.clearRect(0, 0, width, height);
 }
 
 // arrow key listener
