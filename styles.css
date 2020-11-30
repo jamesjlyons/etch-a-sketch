@@ -165,6 +165,35 @@ button:focus {
   display: none;
 }
 
+.shine {
+  display: block;
+  position: absolute;
+  z-index: 100;
+  top: 33px;
+  left: 33px;
+  width: 768px;
+  height: 468px;
+  margin: 16px;
+  border-radius: 16px;
+  background: linear-gradient(
+      114.46deg,
+      rgba(255, 255, 255, 0.04) 10.21%,
+      rgba(255, 255, 255, 0.05) 18.91%,
+      rgba(255, 255, 255, 0) 30.42%
+    ),
+    linear-gradient(
+      155.8deg,
+      rgba(255, 255, 255, 0.1) 17.2%,
+      rgba(255, 255, 255, 0) 75.24%
+    );
+  opacity: 0.5;
+  /* clip-path: polygon(52% 0, 100% 0, 100% 100%, 70% 100%); */
+  clip-path: path(
+    "M0 73.665c0-27.138 0-40.706 5.78-50.84A44 44 0 0122.2 6.405C32.334.625 45.902.625 73.04.625h619.92c27.138 0 40.706 0 50.84 5.78a43.998 43.998 0 0116.42 16.42C766 32.959 766 46.527 766 73.665v332.67c0 27.138 0 40.706-5.78 50.84a43.996 43.996 0 01-16.42 16.42c-10.134 5.78-23.702 5.78-50.84 5.78H73.04c-27.138 0-40.706 0-50.84-5.78a43.998 43.998 0 01-16.42-16.42C0 447.041 0 433.473 0 406.335V73.665z"
+  );
+  filter: blur(22px);
+}
+
 .shake {
   animation: shake 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   transform: translate3d(0, 0, 0);
