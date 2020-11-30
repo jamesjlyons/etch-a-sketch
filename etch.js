@@ -8,7 +8,9 @@ const shakeButton = document.querySelector(".shake-button");
 const moveAmount = 8;
 const moveMoreAmount = 16;
 let hue = 0;
-var timer;
+let timer;
+const instructs = document.querySelector(".instructions");
+let instructsHide = false;
 
 // setup canvas
 // const width = canvas.width;
@@ -79,6 +81,7 @@ function draw({ key }) {
   ctx.stroke();
   ctxBlur.lineTo(x, y);
   ctxBlur.stroke();
+  instructionsHider();
 }
 
 // arrow button draw
@@ -116,6 +119,7 @@ function arrowKeyDraw({ targetClass }) {
   ctx.stroke();
   ctxBlur.lineTo(x, y);
   ctxBlur.stroke();
+  instructionsHider();
 }
 
 // draw more function
@@ -153,6 +157,7 @@ function drawMore({ key }) {
   ctx.stroke();
   ctxBlur.lineTo(x, y);
   ctxBlur.stroke();
+  instructionsHider();
 }
 
 // arrow button draw more function
@@ -190,6 +195,7 @@ function arrowKeyDrawMore({ targetClass }) {
   ctx.stroke();
   ctxBlur.lineTo(x, y);
   ctxBlur.stroke();
+  instructionsHider();
 }
 
 // keypress handlers
@@ -232,7 +238,6 @@ function arrowKeyUp() {
   clearInterval(timer);
 }
 
-// TODO: clear blurred canvas too
 // clear function
 function clearCanvas() {
   screen.classList.add("shake");
@@ -248,6 +253,17 @@ function clearCanvas() {
 function fadeCanvas() {
   ctx.clearRect(0, 0, width, height);
   ctxBlur.clearRect(0, 0, width, height);
+}
+
+// hide and show instructions
+function instructionsHider() {
+  console.log("instructionsHider");
+  if (instructsHide == false) {
+    instructs.classList.add("hide");
+    instructsHide = true;
+  } else {
+    return;
+  }
 }
 
 // arrow key listener
