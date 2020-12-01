@@ -1,13 +1,16 @@
 // Select elements on the page
 const canvas = document.querySelector("#etch");
 const canvasBlur = document.querySelector("#etchBlur");
+const screen = document.querySelector(".canvas-wrapper");
 const ctx = canvas.getContext("2d");
 const ctxBlur = canvasBlur.getContext("2d");
 const shakeButton = document.querySelector(".shake-button");
 const moveAmount = 8;
 const moveMoreAmount = 16;
 let hue = 0;
-var timer;
+let timer;
+const instructs = document.querySelector(".instructions");
+let instructsHide = false;
 
 // setup canvas
 // const width = canvas.width;
@@ -78,6 +81,7 @@ function draw({ key }) {
   ctx.stroke();
   ctxBlur.lineTo(x, y);
   ctxBlur.stroke();
+  instructionsHider();
 }
 
 // arrow button draw
@@ -86,9 +90,13 @@ function arrowKeyDraw({ targetClass }) {
   hue += 4;
   ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
   ctx.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
+  ctxBlur.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  ctxBlur.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
   // start path
   ctx.beginPath();
   ctx.moveTo(x, y);
+  ctxBlur.beginPath();
+  ctxBlur.moveTo(x, y);
   // move x and y based on input
   switch (targetClass) {
     case "upkey":
@@ -109,15 +117,25 @@ function arrowKeyDraw({ targetClass }) {
   }
   ctx.lineTo(x, y);
   ctx.stroke();
+  ctxBlur.lineTo(x, y);
+  ctxBlur.stroke();
+  instructionsHider();
 }
 
 // draw more function
 function drawMore({ key }) {
   console.log("moar");
   console.log(key);
+  hue += 4;
+  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  ctx.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
+  ctxBlur.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  ctxBlur.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
   // start path
   ctx.beginPath();
   ctx.moveTo(x, y);
+  ctxBlur.beginPath();
+  ctxBlur.moveTo(x, y);
   // move x and y based on input
   switch (key) {
     case "ArrowUp":
@@ -137,6 +155,9 @@ function drawMore({ key }) {
   }
   ctx.lineTo(x, y);
   ctx.stroke();
+  ctxBlur.lineTo(x, y);
+  ctxBlur.stroke();
+  instructionsHider();
 }
 
 // arrow button draw more function
@@ -145,9 +166,13 @@ function arrowKeyDrawMore({ targetClass }) {
   hue += 4;
   ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
   ctx.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
+  ctxBlur.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  ctxBlur.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
   // start path
   ctx.beginPath();
   ctx.moveTo(x, y);
+  ctxBlur.beginPath();
+  ctxBlur.moveTo(x, y);
   // move x and y based on input
   switch (targetClass) {
     case "upkey":
@@ -168,6 +193,9 @@ function arrowKeyDrawMore({ targetClass }) {
   }
   ctx.lineTo(x, y);
   ctx.stroke();
+  ctxBlur.lineTo(x, y);
+  ctxBlur.stroke();
+  instructionsHider();
 }
 
 // keypress handlers
@@ -204,7 +232,7 @@ function arrowKeyDown(e) {
   }
 }
 
-function arrowKeyUp(e) {
+function arrowKeyUp() {
   console.log("arrowbuttup");
   // clearInterval(delay);
   clearInterval(timer);
@@ -212,18 +240,30 @@ function arrowKeyUp(e) {
 
 // clear function
 function clearCanvas() {
-  canvas.classList.add("shake");
+  screen.classList.add("shake");
   fadeCanvas();
-  canvas.addEventListener(
+  screen.addEventListener(
     "animationend",
     function () {
-      canvas.classList.remove("shake");
+      screen.classList.remove("shake");
     },
     { once: true }
   );
 }
 function fadeCanvas() {
   ctx.clearRect(0, 0, width, height);
+  ctxBlur.clearRect(0, 0, width, height);
+}
+
+// hide and show instructions
+function instructionsHider() {
+  console.log("instructionsHider");
+  if (instructsHide == false) {
+    instructs.classList.add("hide");
+    instructsHide = true;
+  } else {
+    return;
+  }
 }
 
 // arrow key listener
@@ -241,3 +281,7 @@ document.querySelector(".leftkey").addEventListener("mouseup", arrowKeyUp);
 document.querySelector(".upkey").addEventListener("mouseup", arrowKeyUp);
 document.querySelector(".downkey").addEventListener("mouseup", arrowKeyUp);
 document.querySelector(".rightkey").addEventListener("mouseup", arrowKeyUp);
+document.querySelector(".leftkey").addEventListener("mouseout", arrowKeyUp);
+document.querySelector(".upkey").addEventListener("mouseout", arrowKeyUp);
+document.querySelector(".downkey").addEventListener("mouseout", arrowKeyUp);
+document.querySelector(".rightkey").addEventListener("mouseout", arrowKeyUp);
