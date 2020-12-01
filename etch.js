@@ -11,6 +11,9 @@ let hue = 0;
 let timer;
 const instructs = document.querySelector(".instructions");
 let instructsHide = false;
+const modalInner = document.querySelector(".modal-inner");
+const modalOuter = document.querySelector(".modal-outer");
+const questionButton = document.querySelector(".info");
 
 // setup canvas
 // const width = canvas.width;
@@ -285,3 +288,27 @@ document.querySelector(".leftkey").addEventListener("mouseout", arrowKeyUp);
 document.querySelector(".upkey").addEventListener("mouseout", arrowKeyUp);
 document.querySelector(".downkey").addEventListener("mouseout", arrowKeyUp);
 document.querySelector(".rightkey").addEventListener("mouseout", arrowKeyUp);
+
+// open and close modal
+function openModal() {
+  console.log("opennn");
+  modalOuter.classList.add("open");
+}
+
+function closeModal() {
+  modalOuter.classList.remove("open");
+}
+
+questionButton.addEventListener("click", openModal);
+modalOuter.addEventListener("click", function (e) {
+  const isOutside = !e.target.closest(".modal-inner");
+  if (isOutside) {
+    closeModal();
+  }
+});
+
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeModal();
+  }
+});
