@@ -209,7 +209,7 @@ button:focus {
 }
 
 .info {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.2);
   text-align: center;
   display: flex;
   align-items: center;
@@ -219,6 +219,13 @@ button:focus {
   height: 24px;
   border-radius: 24px;
   margin-top: 48px;
+  user-select: none;
+  cursor: pointer;
+  transition: background-color, 500ms ease;
+}
+
+.info:hover {
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .modal-outer {
@@ -230,39 +237,58 @@ button:focus {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
   z-index: 100;
   /* hide initially */
   opacity: 0;
+  -webkit-backdrop-filter: blur(0px);
+  backdrop-filter: blur(0px);
   pointer-events: none;
-  transition: opacity, 500ms ease;
+  transition: opacity, backdrop-filter, 500ms ease;
 }
 
 .modal-outer.open {
   opacity: 100;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
   pointer-events: all;
 }
 
 .modal-inner {
   width: 400px;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.9);
+  border: rgba(255, 255, 255, 0.2) solid 1px;
   border-radius: 24px;
   text-align: center;
-  padding: 24px;
-  transform: scale(0.96);
+  padding: 24px 24px 48px 24px;
+  transform: scale(0.96) translateY(-16%);
   transition: transform, 500ms ease;
 }
 
 .modal-outer.open .modal-inner {
-  transform: scale(1);
+  transform: scale(1) translateY(-16%);
 }
 
 .modal-inner a {
   color: #20e9b7;
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 16px;
+  transition: background-color, 500ms ease;
+}
+
+.modal-close:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .shake {

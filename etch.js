@@ -13,6 +13,7 @@ const instructs = document.querySelector(".instructions");
 let instructsHide = false;
 const modalInner = document.querySelector(".modal-inner");
 const modalOuter = document.querySelector(".modal-outer");
+const modalCloseButton = document.querySelector(".modal-close");
 const questionButton = document.querySelector(".info");
 
 // setup canvas
@@ -306,6 +307,8 @@ modalOuter.addEventListener("click", function (e) {
     closeModal();
   }
 });
+
+modalCloseButton.addEventListener("click", closeModal);
 
 window.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
