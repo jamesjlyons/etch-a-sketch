@@ -4,6 +4,7 @@ const canvasBlur = document.querySelector("#etchBlur");
 const screen = document.querySelector(".canvas-wrapper");
 const ctx = canvas.getContext("2d");
 const ctxBlur = canvasBlur.getContext("2d");
+const bothCtx = [ctx, ctxBlur];
 const shakeButton = document.querySelector(".shake-button");
 const moveAmount = 8;
 const moveMoreAmount = 16;
@@ -23,33 +24,20 @@ const { width, height } = canvas; // same as above, just destructured
 let x = Math.floor(Math.random() * width);
 let y = Math.floor(Math.random() * height);
 
-ctx.lineJoin = "square";
-ctx.lineCap = "square";
-ctx.lineWidth = moveAmount;
-// ctx.strokeStyle = "hsla(165, 82%, 52%, 1)";
-// ctx.shadowColor = "hsla(165, 82%, 52%, 0.8)";
-ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-ctx.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
-ctx.shadowBlur = 16;
+bothCtx.forEach((el) => {
+  // define line styles
+  el.lineJoin = "square";
+  el.lineCap = "square";
+  el.lineWidth = moveAmount;
+  el.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  el.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
+  el.shadowBlur = 16;
 
-ctx.beginPath(); // start drawing
-ctx.moveTo(x, y);
-ctx.lineTo(x, y);
-ctx.stroke();
-
-ctxBlur.lineJoin = "square";
-ctxBlur.lineCap = "square";
-ctxBlur.lineWidth = moveAmount;
-// ctxBlur.strokeStyle = "hsla(165, 82%, 52%, 1)";
-// ctxBlur.shadowColor = "hsla(165, 82%, 52%, 0.8)";
-ctxBlur.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-ctxBlur.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
-ctxBlur.shadowBlur = 16;
-
-ctxBlur.beginPath(); // start drawing
-ctxBlur.moveTo(x, y);
-ctxBlur.lineTo(x, y);
-ctxBlur.stroke();
+  el.beginPath(); // start drawing
+  el.moveTo(x, y);
+  el.lineTo(x, y);
+  el.stroke();
+});
 
 // draw function
 function draw({ key }) {
