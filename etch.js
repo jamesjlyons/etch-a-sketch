@@ -43,15 +43,14 @@ bothCtx.forEach((el) => {
 function draw({ key }) {
   console.log(key);
   hue += 4;
-  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-  ctx.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
-  ctxBlur.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-  ctxBlur.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
-  // start path
-  ctx.beginPath();
-  ctx.moveTo(x, y);
-  ctxBlur.beginPath();
-  ctxBlur.moveTo(x, y);
+  bothCtx.forEach((el) => {
+    el.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+    el.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
+    // start path
+    el.beginPath();
+    el.moveTo(x, y);
+  });
+
   // move x and y based on input
   switch (key) {
     case "ArrowUp":
@@ -69,10 +68,10 @@ function draw({ key }) {
     default:
       break;
   }
-  ctx.lineTo(x, y);
-  ctx.stroke();
-  ctxBlur.lineTo(x, y);
-  ctxBlur.stroke();
+  bothCtx.forEach((el) => {
+    el.lineTo(x, y);
+    el.stroke();
+  });
   instructionsHider();
 }
 
@@ -80,15 +79,13 @@ function draw({ key }) {
 function arrowKeyDraw({ targetClass }) {
   console.log(targetClass);
   hue += 4;
-  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-  ctx.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
-  ctxBlur.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-  ctxBlur.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
-  // start path
-  ctx.beginPath();
-  ctx.moveTo(x, y);
-  ctxBlur.beginPath();
-  ctxBlur.moveTo(x, y);
+  bothCtx.forEach((el) => {
+    el.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+    el.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
+    // start path
+    el.beginPath();
+    el.moveTo(x, y);
+  });
   // move x and y based on input
   switch (targetClass) {
     case "upkey":
@@ -107,10 +104,10 @@ function arrowKeyDraw({ targetClass }) {
       console.log(targetClass);
       break;
   }
-  ctx.lineTo(x, y);
-  ctx.stroke();
-  ctxBlur.lineTo(x, y);
-  ctxBlur.stroke();
+  bothCtx.forEach((el) => {
+    el.lineTo(x, y);
+    el.stroke();
+  });
   instructionsHider();
 }
 
@@ -119,15 +116,13 @@ function drawMore({ key }) {
   console.log("moar");
   console.log(key);
   hue += 4;
-  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-  ctx.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
-  ctxBlur.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-  ctxBlur.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
-  // start path
-  ctx.beginPath();
-  ctx.moveTo(x, y);
-  ctxBlur.beginPath();
-  ctxBlur.moveTo(x, y);
+  bothCtx.forEach((el) => {
+    el.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+    el.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
+    // start path
+    el.beginPath();
+    el.moveTo(x, y);
+  });
   // move x and y based on input
   switch (key) {
     case "ArrowUp":
@@ -145,10 +140,10 @@ function drawMore({ key }) {
     default:
       break;
   }
-  ctx.lineTo(x, y);
-  ctx.stroke();
-  ctxBlur.lineTo(x, y);
-  ctxBlur.stroke();
+  bothCtx.forEach((el) => {
+    el.lineTo(x, y);
+    el.stroke();
+  });
   instructionsHider();
 }
 
@@ -156,15 +151,13 @@ function drawMore({ key }) {
 function arrowKeyDrawMore({ targetClass }) {
   console.log(targetClass);
   hue += 4;
-  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-  ctx.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
-  ctxBlur.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-  ctxBlur.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
-  // start path
-  ctx.beginPath();
-  ctx.moveTo(x, y);
-  ctxBlur.beginPath();
-  ctxBlur.moveTo(x, y);
+  bothCtx.forEach((el) => {
+    el.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+    el.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
+    // start path
+    el.beginPath();
+    el.moveTo(x, y);
+  });
   // move x and y based on input
   switch (targetClass) {
     case "upkey":
@@ -183,10 +176,10 @@ function arrowKeyDrawMore({ targetClass }) {
       console.log(targetClass);
       break;
   }
-  ctx.lineTo(x, y);
-  ctx.stroke();
-  ctxBlur.lineTo(x, y);
-  ctxBlur.stroke();
+  bothCtx.forEach((el) => {
+    el.lineTo(x, y);
+    el.stroke();
+  });
   instructionsHider();
 }
 
