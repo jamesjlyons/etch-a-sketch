@@ -135,12 +135,13 @@ function arrowKeyDown(e) {
     //first draw function
     moveAmount = 16;
     arrowKeyDraw({ targetClass: e.target.className });
+    moveAmount = 8;
     // loop drawing while button is pressed
     timer = setInterval(function () {
       moveAmount = 16;
       arrowKeyDraw({ targetClass: e.target.className });
+      moveAmount = 8;
     }, 100); // to prevent looping
-    moveAmount = 8;
   } else {
     //first draw function
     arrowKeyDraw({ targetClass: e.target.className });
