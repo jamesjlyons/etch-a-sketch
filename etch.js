@@ -6,8 +6,7 @@ const ctx = canvas.getContext("2d");
 const ctxBlur = canvasBlur.getContext("2d");
 const bothCtx = [ctx, ctxBlur];
 const shakeButton = document.querySelector(".shake-button");
-const moveAmount = 8;
-const moveMoreAmount = 16;
+let moveAmount = 8;
 let hue = 0;
 let timer;
 const instructs = document.querySelector(".instructions");
@@ -111,83 +110,15 @@ function arrowKeyDraw({ targetClass }) {
   instructionsHider();
 }
 
-// draw more function
-function drawMore({ key }) {
-  console.log("moar");
-  console.log(key);
-  hue += 4;
-  bothCtx.forEach((el) => {
-    el.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-    el.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
-    // start path
-    el.beginPath();
-    el.moveTo(x, y);
-  });
-  // move x and y based on input
-  switch (key) {
-    case "ArrowUp":
-      y = y - moveMoreAmount;
-      break;
-    case "ArrowDown":
-      y = y + moveMoreAmount;
-      break;
-    case "ArrowRight":
-      x = x + moveMoreAmount;
-      break;
-    case "ArrowLeft":
-      x = x - moveMoreAmount;
-      break;
-    default:
-      break;
-  }
-  bothCtx.forEach((el) => {
-    el.lineTo(x, y);
-    el.stroke();
-  });
-  instructionsHider();
-}
-
-// arrow button draw more function
-function arrowKeyDrawMore({ targetClass }) {
-  console.log(targetClass);
-  hue += 4;
-  bothCtx.forEach((el) => {
-    el.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-    el.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
-    // start path
-    el.beginPath();
-    el.moveTo(x, y);
-  });
-  // move x and y based on input
-  switch (targetClass) {
-    case "upkey":
-      y = y - moveMoreAmount;
-      break;
-    case "downkey":
-      y = y + moveMoreAmount;
-      break;
-    case "rightkey":
-      x = x + moveMoreAmount;
-      break;
-    case "leftkey":
-      x = x - moveMoreAmount;
-      break;
-    default:
-      console.log(targetClass);
-      break;
-  }
-  bothCtx.forEach((el) => {
-    el.lineTo(x, y);
-    el.stroke();
-  });
-  instructionsHider();
-}
-
 // keypress handlers
 function handleKey(e) {
   if (e.shiftKey && e.key.includes("Arrow")) {
+    // draw larger strokes when shift is held
     e.preventDefault();
-    drawMore({ key: e.key });
+    moveAmount = 16;
+    draw({ key: e.key });
+    // reset move amount
+    moveAmount = 8;
   }
   if (e.key.includes("Arrow")) {
     e.preventDefault();
@@ -202,11 +133,14 @@ function arrowKeyDown(e) {
   console.log("arrowbuttdown");
   if (e.shiftKey) {
     //first draw function
-    arrowKeyDrawMore({ targetClass: e.target.className });
+    moveAmount = 16;
+    arrowKeyDraw({ targetClass: e.target.className });
     // loop drawing while button is pressed
     timer = setInterval(function () {
-      arrowKeyDrawMore({ targetClass: e.target.className });
+      moveAmount = 16;
+      arrowKeyDraw({ targetClass: e.target.className });
     }, 100); // to prevent looping
+    moveAmount = 8;
   } else {
     //first draw function
     arrowKeyDraw({ targetClass: e.target.className });
