@@ -186,6 +186,10 @@ function instructionsHider() {
   }
 }
 
+function instructionsShow() {
+  instructs.classList.add("show");
+}
+
 // arrow key listener
 window.addEventListener("keydown", handleKey);
 
@@ -231,3 +235,15 @@ window.addEventListener("keydown", (e) => {
     closeModal();
   }
 });
+
+window.onload = () => {
+  console.log("page is fully loaded");
+  // var timeoutID = scope.setTimeout(code[, delay]);
+  function lightsOn() {
+    document
+      .querySelector("html")
+      .style.setProperty("background-color", "var(--bg-lights-on)");
+  }
+  setTimeout(lightsOn, 300);
+  setTimeout(instructionsShow, 800);
+};

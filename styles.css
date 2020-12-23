@@ -11,11 +11,17 @@
   font-style: normal;
 }
 
+:root {
+  --bg-lights-out: #000;
+  --bg-lights-on: #333c45;
+}
+
 html {
-  background-color: #333c45;
+  background-color: var(--bg-lights-out);
   background-image: url("./img/padded.png");
   color: #fff;
   font-family: "JetBrains Mono", monospace;
+  transition: background-color 600ms ease;
 }
 
 body {
@@ -173,12 +179,17 @@ button:focus {
   left: 62px;
   z-index: 50;
   line-height: 24px;
-  opacity: 0.8;
+  opacity: 0;
+}
+
+.instructions.show {
+  /* display: none; */
+  animation: flickerIn 0.3s ease both;
 }
 
 .instructions.hide {
   /* display: none; */
-  animation: flicker 0.3s ease both;
+  animation: flickerOut 0.3s ease both;
 }
 
 .shine {
@@ -321,7 +332,34 @@ button:focus {
   }
 }
 
-@keyframes flicker {
+@keyframes flickerIn {
+  10%,
+  90% {
+    opacity: 0;
+  }
+
+  20%,
+  80% {
+    opacity: 0.1;
+  }
+
+  30%,
+  50%,
+  70% {
+    opacity: 0.3;
+  }
+
+  40%,
+  60% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes flickerOut {
   10%,
   90% {
     opacity: 0.3;
