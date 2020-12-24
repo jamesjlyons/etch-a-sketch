@@ -197,6 +197,7 @@ button:focus {
 .shine {
   display: block;
   position: absolute;
+  pointer-events: none;
   z-index: 100;
   top: 33px;
   left: 33px;
@@ -415,12 +416,12 @@ button:focus {
 
   canvas {
     width: calc(100vw - 80px);
-    height: calc(100vh - 200px);
+    height: calc(100vh - 250px);
   }
 
   .shine {
-    width: 50vw;
-    height: 60vh;
+    width: calc(80vw - 80px);
+    height: calc(90vh - 250px);
   }
 
   #etchBlur {
