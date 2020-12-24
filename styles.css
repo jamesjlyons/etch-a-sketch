@@ -45,6 +45,7 @@ body {
     0px 0.332071px 3.32071px rgba(0, 0, 0, 0.0950605),
     inset 0px -8px 0px #161616, inset 0px 2px 2px rgba(255, 255, 255, 0.13);
   border-radius: 72px;
+  user-select: none;
 }
 
 .canvases {
