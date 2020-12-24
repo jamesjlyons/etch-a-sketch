@@ -1,6 +1,8 @@
 // Select elements on the page
 const canvas = document.querySelector("#etch");
 const canvasBlur = document.querySelector("#etchBlur");
+const canvasEl = document.querySelector("canvas");
+const styles = window.getComputedStyle(canvasEl);
 const screen = document.querySelector(".canvas-wrapper");
 const ctx = canvas.getContext("2d");
 const ctxBlur = canvasBlur.getContext("2d");
@@ -17,6 +19,22 @@ const modalCloseButton = document.querySelector(".modal-close");
 const questionButton = document.querySelector(".info");
 
 // setup canvas
+// define widths in js
+canvas.setAttribute("width", parseInt(styles.width, 10) * 2);
+canvas.setAttribute("height", parseInt(styles.height, 10) * 2);
+canvasBlur.setAttribute("width", parseInt(styles.width, 10) * 2);
+canvasBlur.setAttribute("height", parseInt(styles.height, 10) * 2);
+
+window.addEventListener("resize", resizeCanvas, false);
+
+function resizeCanvas(e) {
+  console.log(styles.width);
+  canvas.setAttribute("width", parseInt(styles.width, 10) * 2);
+  canvas.setAttribute("height", parseInt(styles.height, 10) * 2);
+  canvasBlur.setAttribute("width", parseInt(styles.width, 10) * 2);
+  canvasBlur.setAttribute("height", parseInt(styles.height, 10) * 2);
+}
+
 // const width = canvas.width;
 // const height = canvas.height;
 const { width, height } = canvas; // same as above, just destructured
