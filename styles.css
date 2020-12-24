@@ -11,11 +11,17 @@
   font-style: normal;
 }
 
+:root {
+  --bg-lights-out: #000;
+  --bg-lights-on: #333c45;
+}
+
 html {
-  background-color: #333c45;
+  background-color: var(--bg-lights-out);
   background-image: url("./img/padded.png");
   color: #fff;
   font-family: "JetBrains Mono", monospace;
+  transition: background-color 600ms ease;
 }
 
 body {
@@ -39,6 +45,7 @@ body {
     0px 0.332071px 3.32071px rgba(0, 0, 0, 0.0950605),
     inset 0px -8px 0px #161616, inset 0px 2px 2px rgba(255, 255, 255, 0.13);
   border-radius: 72px;
+  user-select: none;
 }
 
 .canvases {
@@ -67,8 +74,6 @@ canvas {
 }
 
 #etchBlur {
-  width: 800px;
-  height: 500px;
   background: rgba(0, 0, 0, 0);
   border: 0px solid #fafafa;
   position: absolute;
@@ -78,6 +83,8 @@ canvas {
   filter: blur(11px) saturate(1) brightness(1.5);
   transform-origin: center;
   transform: scale(1.01);
+  pointer-events: none;
+  -webkit-touch-callout: none;
 }
 
 .controls {
@@ -95,6 +102,7 @@ button {
   font-family: "JetBrains Mono", monospace;
   font-size: 16px;
   user-select: none;
+  -webkit-touch-callout: none;
   border-radius: 10px;
   font-weight: bold;
   text-transform: uppercase;
@@ -173,17 +181,23 @@ button:focus {
   left: 62px;
   z-index: 50;
   line-height: 24px;
-  opacity: 0.8;
+  opacity: 0;
+}
+
+.instructions.show {
+  /* display: none; */
+  animation: flickerIn 0.3s ease both;
 }
 
 .instructions.hide {
   /* display: none; */
-  animation: flicker 0.3s ease both;
+  animation: flickerOut 0.3s ease both;
 }
 
 .shine {
   display: block;
   position: absolute;
+  pointer-events: none;
   z-index: 100;
   top: 33px;
   left: 33px;
@@ -321,7 +335,34 @@ button:focus {
   }
 }
 
-@keyframes flicker {
+@keyframes flickerIn {
+  10%,
+  90% {
+    opacity: 0;
+  }
+
+  20%,
+  80% {
+    opacity: 0.1;
+  }
+
+  30%,
+  50%,
+  70% {
+    opacity: 0.3;
+  }
+
+  40%,
+  60% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes flickerOut {
   10%,
   90% {
     opacity: 0.3;
@@ -345,5 +386,64 @@ button:focus {
 
   100% {
     opacity: 0;
+  }
+}
+
+@media (max-width: 1000px) {
+  body {
+    justify-content: space-around;
+  }
+
+  .canvas-wrapper {
+    padding: 16px 16px 8px 16px;
+    box-shadow: 0px 12px 120px rgba(0, 0, 0, 0.31),
+      0px 5.01331px 50.1331px rgba(0, 0, 0, 0.225196),
+      0px 2.68036px 26.8036px rgba(0, 0, 0, 0.189271),
+      0px 1.50259px 15.0259px rgba(0, 0, 0, 0.161254),
+      0px 0.798012px 7.98012px rgba(0, 0, 0, 0.132755),
+      0px 0.332071px 3.32071px rgba(0, 0, 0, 0.0950605),
+      inset 0px -8px 0px #161616, inset 0px 2px 2px rgba(255, 255, 255, 0.13);
+    border-radius: 24px;
+    max-width: calc(100vw - 40px);
+  }
+
+  .canvases {
+    padding: 16px;
+    box-shadow: inset 0px 0px 6px rgba(255, 255, 255, 0.13),
+      inset 0px 0px 18px 18px #161616, inset 0px 0px 60px rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+  }
+
+  canvas {
+    width: calc(100vw - 80px);
+    height: calc(100vh - 250px);
+  }
+
+  .shine {
+    width: calc(80vw - 80px);
+    height: calc(90vh - 250px);
+  }
+
+  #etchBlur {
+    position: absolute;
+    left: 16px;
+    top: 16px;
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+
+  .instructions {
+    max-width: 60vw;
+  }
+
+  .info {
+    margin-top: 8px;
   }
 }

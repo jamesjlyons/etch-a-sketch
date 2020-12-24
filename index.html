@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Etch</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -18,16 +18,16 @@
             <li>Clear Canvas: C</li>
           </ul>
         </div>
-        <canvas width="1600" height="1000" id="etch"></canvas>
-        <canvas width="1600" height="1000" id="etchBlur"></canvas>
+        <canvas id="etch"></canvas>
+        <canvas id="etchBlur"></canvas>
       </div>
       <div class="controls">
-        <button class="shake-button">Clear</button>
+        <button type="button" class="shake-button">Clear</button>
         <div class="arrows">
-          <button class="leftkey">←</button>
-          <button class="upkey">↑</button>
-          <button class="downkey">↓</button>
-          <button class="rightkey">→</button>
+          <button type="button" class="leftkey">←</button>
+          <button type="button" class="upkey">↑</button>
+          <button type="button" class="downkey">↓</button>
+          <button type="button" class="rightkey">→</button>
         </div>
       </div>
     </div>
@@ -37,12 +37,13 @@
     <div class="modal-outer">
       <div class="modal-inner">
         <button class="modal-close">✕</button>
-        <h4>No questions allowed.</h4>
+        <h4>A little JavaScript etch-a-sketch</h4>
         <p>
           This is an exercise project from Wes Bos'
           <a href="https://www.beginnerjavascript.com/">Beginner JS course</a>,
           with a little extra fancy added.
         </p>
+        <a href="https://github.com/jamesjlyons/etch-a-sketch">GitHub repo</a>
         <a href="https://www.jameslyons.design">jameslyons.design</a>
       </div>
     </div>
