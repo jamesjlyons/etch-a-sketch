@@ -210,6 +210,21 @@ document.querySelector(".upkey").addEventListener("mouseout", arrowKeyUp);
 document.querySelector(".downkey").addEventListener("mouseout", arrowKeyUp);
 document.querySelector(".rightkey").addEventListener("mouseout", arrowKeyUp);
 
+document.querySelector(".leftkey").addEventListener("touchstart", arrowKeyDown);
+document.querySelector(".upkey").addEventListener("touchstart", arrowKeyDown);
+document.querySelector(".downkey").addEventListener("touchstart", arrowKeyDown);
+document
+  .querySelector(".rightkey")
+  .addEventListener("touchstart", arrowKeyDown);
+document.querySelector(".leftkey").addEventListener("touchend", arrowKeyUp);
+document.querySelector(".upkey").addEventListener("touchend", arrowKeyUp);
+document.querySelector(".downkey").addEventListener("touchend", arrowKeyUp);
+document.querySelector(".rightkey").addEventListener("touchend", arrowKeyUp);
+document.querySelector(".leftkey").addEventListener("touchcancel", arrowKeyUp);
+document.querySelector(".upkey").addEventListener("touchcancel", arrowKeyUp);
+document.querySelector(".downkey").addEventListener("touchcancel", arrowKeyUp);
+document.querySelector(".rightkey").addEventListener("touchcancel", arrowKeyUp);
+
 // open and close modal
 function openModal() {
   console.log("opennn");
