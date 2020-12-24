@@ -74,8 +74,6 @@ canvas {
 }
 
 #etchBlur {
-  width: 800px;
-  height: 500px;
   background: rgba(0, 0, 0, 0);
   border: 0px solid #fafafa;
   position: absolute;
@@ -426,8 +424,6 @@ button:focus {
   }
 
   #etchBlur {
-    width: calc(100vw - 80px);
-    height: calc(100vh - 200px);
     position: absolute;
     left: 16px;
     top: 16px;
