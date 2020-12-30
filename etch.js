@@ -92,42 +92,6 @@ function draw({ key }) {
   instructionsHider();
 }
 
-// arrow button draw
-function arrowKeyDraw({ targetClass }) {
-  console.log(targetClass);
-  hue += 4;
-  bothCtx.forEach((el) => {
-    el.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-    el.shadowColor = `hsla(${hue}, 100%, 55%, 0.8)`;
-    // start path
-    el.beginPath();
-    el.moveTo(x, y);
-  });
-  // move x and y based on input
-  switch (targetClass) {
-    case "upkey":
-      y = y - moveAmount;
-      break;
-    case "downkey":
-      y = y + moveAmount;
-      break;
-    case "rightkey":
-      x = x + moveAmount;
-      break;
-    case "leftkey":
-      x = x - moveAmount;
-      break;
-    default:
-      console.log(targetClass);
-      break;
-  }
-  bothCtx.forEach((el) => {
-    el.lineTo(x, y);
-    el.stroke();
-  });
-  instructionsHider();
-}
-
 // keypress handlers
 function handleKey(e) {
   if (e.shiftKey && e.key.includes("Arrow")) {
@@ -147,30 +111,31 @@ function handleKey(e) {
   }
 }
 
-function arrowKeyDown(e) {
+// pass class names which equal key inputs as "key" to draw function
+function arrowButtonDown(e) {
   console.log("arrowbuttdown");
   if (e.shiftKey) {
     //first draw function
     moveAmount = 16;
-    arrowKeyDraw({ targetClass: e.target.className });
+    draw({ key: e.target.className });
     moveAmount = 8;
     // loop drawing while button is pressed
     timer = setInterval(function () {
       moveAmount = 16;
-      arrowKeyDraw({ targetClass: e.target.className });
+      draw({ key: e.target.className });
       moveAmount = 8;
     }, 100); // to prevent looping
   } else {
     //first draw function
-    arrowKeyDraw({ targetClass: e.target.className });
+    draw({ key: e.target.className });
     // loop drawing while button is pressed
     timer = setInterval(function () {
-      arrowKeyDraw({ targetClass: e.target.className });
+      draw({ key: e.target.className });
     }, 100); // to prevent looping
   }
 }
 
-function arrowKeyUp() {
+function arrowButtonUp() {
   console.log("arrowbuttup");
   // clearInterval(delay);
   clearInterval(timer);
@@ -215,33 +180,69 @@ window.addEventListener("keydown", handleKey);
 shakeButton.addEventListener("click", clearCanvas);
 
 // arrow button listeners
-document.querySelector(".leftkey").addEventListener("mousedown", arrowKeyDown);
-document.querySelector(".upkey").addEventListener("mousedown", arrowKeyDown);
-document.querySelector(".downkey").addEventListener("mousedown", arrowKeyDown);
-document.querySelector(".rightkey").addEventListener("mousedown", arrowKeyDown);
-document.querySelector(".leftkey").addEventListener("mouseup", arrowKeyUp);
-document.querySelector(".upkey").addEventListener("mouseup", arrowKeyUp);
-document.querySelector(".downkey").addEventListener("mouseup", arrowKeyUp);
-document.querySelector(".rightkey").addEventListener("mouseup", arrowKeyUp);
-document.querySelector(".leftkey").addEventListener("mouseout", arrowKeyUp);
-document.querySelector(".upkey").addEventListener("mouseout", arrowKeyUp);
-document.querySelector(".downkey").addEventListener("mouseout", arrowKeyUp);
-document.querySelector(".rightkey").addEventListener("mouseout", arrowKeyUp);
-
-document.querySelector(".leftkey").addEventListener("touchstart", arrowKeyDown);
-document.querySelector(".upkey").addEventListener("touchstart", arrowKeyDown);
-document.querySelector(".downkey").addEventListener("touchstart", arrowKeyDown);
 document
-  .querySelector(".rightkey")
-  .addEventListener("touchstart", arrowKeyDown);
-document.querySelector(".leftkey").addEventListener("touchend", arrowKeyUp);
-document.querySelector(".upkey").addEventListener("touchend", arrowKeyUp);
-document.querySelector(".downkey").addEventListener("touchend", arrowKeyUp);
-document.querySelector(".rightkey").addEventListener("touchend", arrowKeyUp);
-document.querySelector(".leftkey").addEventListener("touchcancel", arrowKeyUp);
-document.querySelector(".upkey").addEventListener("touchcancel", arrowKeyUp);
-document.querySelector(".downkey").addEventListener("touchcancel", arrowKeyUp);
-document.querySelector(".rightkey").addEventListener("touchcancel", arrowKeyUp);
+  .querySelector(".ArrowLeft")
+  .addEventListener("mousedown", arrowButtonDown);
+document
+  .querySelector(".ArrowUp")
+  .addEventListener("mousedown", arrowButtonDown);
+document
+  .querySelector(".ArrowDown")
+  .addEventListener("mousedown", arrowButtonDown);
+document
+  .querySelector(".ArrowRight")
+  .addEventListener("mousedown", arrowButtonDown);
+document.querySelector(".ArrowLeft").addEventListener("mouseup", arrowButtonUp);
+document.querySelector(".ArrowUp").addEventListener("mouseup", arrowButtonUp);
+document.querySelector(".ArrowDown").addEventListener("mouseup", arrowButtonUp);
+document
+  .querySelector(".ArrowRight")
+  .addEventListener("mouseup", arrowButtonUp);
+document
+  .querySelector(".ArrowLeft")
+  .addEventListener("mouseout", arrowButtonUp);
+document.querySelector(".ArrowUp").addEventListener("mouseout", arrowButtonUp);
+document
+  .querySelector(".ArrowDown")
+  .addEventListener("mouseout", arrowButtonUp);
+document
+  .querySelector(".ArrowRight")
+  .addEventListener("mouseout", arrowButtonUp);
+
+document
+  .querySelector(".ArrowLeft")
+  .addEventListener("touchstart", arrowButtonDown);
+document
+  .querySelector(".ArrowUp")
+  .addEventListener("touchstart", arrowButtonDown);
+document
+  .querySelector(".ArrowDown")
+  .addEventListener("touchstart", arrowButtonDown);
+document
+  .querySelector(".ArrowRight")
+  .addEventListener("touchstart", arrowButtonDown);
+document
+  .querySelector(".ArrowLeft")
+  .addEventListener("touchend", arrowButtonUp);
+document.querySelector(".ArrowUp").addEventListener("touchend", arrowButtonUp);
+document
+  .querySelector(".ArrowDown")
+  .addEventListener("touchend", arrowButtonUp);
+document
+  .querySelector(".ArrowRight")
+  .addEventListener("touchend", arrowButtonUp);
+document
+  .querySelector(".ArrowLeft")
+  .addEventListener("touchcancel", arrowButtonUp);
+document
+  .querySelector(".ArrowUp")
+  .addEventListener("touchcancel", arrowButtonUp);
+document
+  .querySelector(".ArrowDown")
+  .addEventListener("touchcancel", arrowButtonUp);
+document
+  .querySelector(".ArrowRight")
+  .addEventListener("touchcancel", arrowButtonUp);
 
 // open and close modal
 function openModal() {
