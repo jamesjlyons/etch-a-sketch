@@ -106,7 +106,7 @@ button {
   border-radius: 10px;
   font-weight: bold;
   text-transform: uppercase;
-  transition: text-shadow, box-shadow, background, color, 0ms linear;
+  /* transition: text-shadow, box-shadow, background, color, 0ms linear; */
 }
 
 button:hover {
@@ -141,10 +141,10 @@ button:focus {
   transition: text-shadow, box-shadow, background, 10ms ease;
 }
 
-.leftkey,
-.upkey,
-.downkey,
-.rightkey {
+.ArrowLeft,
+.ArrowUp,
+.ArrowDown,
+.ArrowRight {
   text-shadow: 0px 0px 4px rgba(255, 255, 255, 0.62);
   background: radial-gradient(50% 50% at 50% 50%, #3c3c3c 0%, #2c2c2c 85.94%);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3), inset 0px 2px 1px #393939,
@@ -153,18 +153,18 @@ button:focus {
   transition: text-shadow, box-shadow, background, 500ms ease;
 }
 
-.leftkey:hover,
-.upkey:hover,
-.downkey:hover,
-.rightkey:hover {
+.ArrowLeft:hover,
+.ArrowUp:hover,
+.ArrowDown:hover,
+.ArrowRight:hover {
   text-shadow: 0px 0px 12px rgba(255, 255, 255, 1);
   background: radial-gradient(50% 50% at 50% 50%, #3c3c3c 0%, #2c2c2c 85.94%);
 }
 
-.leftkey:active,
-.upkey:active,
-.downkey:active,
-.rightkey:active {
+.ArrowLeft:active,
+.ArrowUp:active,
+.ArrowDown:active,
+.ArrowRight:active {
   color: #ccc;
   text-shadow: 0px 0px 4px rgba(255, 255, 255, 0);
   background: radial-gradient(50% 50% at 50% 50%, #313131 0%, #222222 85.94%);
